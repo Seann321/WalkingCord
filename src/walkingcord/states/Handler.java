@@ -2,6 +2,8 @@ package walkingcord.states;
 
 import walkingcord.Display;
 import walkingcord.Main;
+import walkingcord.controls.KeyManager;
+import walkingcord.controls.MouseManager;
 import walkingcord.gfx.GUI;
 
 public class Handler {
@@ -12,9 +14,12 @@ public class Handler {
         this.main = main;
     }
 
-    public void switchToGameState() {
-        State.currentState = main.getGameState();
-        GUI.currentGUI = main.getGameState().gui;
+    public MouseManager getMM() {
+        return main.getMouseManager();
+    }
+    
+    public KeyManager getKM() {
+        return main.getKeyManager();
     }
 
     public State getCurrentState() {

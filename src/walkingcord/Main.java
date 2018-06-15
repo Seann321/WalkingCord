@@ -1,5 +1,6 @@
 package walkingcord;
 
+import java.awt.AWTException;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.util.logging.Logger;
 import walkingcord.controls.KeyManager;
 import walkingcord.controls.MouseManager;
 import walkingcord.gfx.GUI;
-import walkingcord.gfx.image.Assets;
 import walkingcord.states.GameState;
 import walkingcord.states.Handler;
 import walkingcord.states.MenuState;
@@ -32,7 +32,7 @@ public class Main implements Runnable {
     MenuState menuState;
     GameState gameState;
     
-    public Main(String title, int width, int height) {
+    public Main(String title, int width, int height) throws AWTException {
         this.width = width;
         this.height = height;
         this.title = title;
@@ -42,7 +42,7 @@ public class Main implements Runnable {
         gameState = new GameState(handler);
         mouseManager = new MouseManager(handler);
         keyManager = new KeyManager();
-        State.currentState = menuState;
+        State.currentState = gameState;
     }
 
     private void init() throws IOException {
@@ -52,7 +52,6 @@ public class Main implements Runnable {
         display.getFrame().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
-        Assets.init();
     }
 
     private void tick() {
@@ -224,12 +223,5 @@ public class Main implements Runnable {
         this.g = g;
     }
 
-    public GameState getGameState() {
-        return gameState;
-    }
-
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
-    }
 
 }
